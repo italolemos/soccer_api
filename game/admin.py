@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Team, Player, Match
+from .models import Team, Player, Match, User
 
 
 class TeamAdmin(admin.ModelAdmin):
@@ -11,3 +11,4 @@ class TeamAdmin(admin.ModelAdmin):
 admin.site.register(Team, TeamAdmin)
 admin.site.register(Player)
 admin.site.register(Match)
+admin.site.register(User)
