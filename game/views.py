@@ -1,7 +1,24 @@
+from django.views.generic.base import TemplateView
 from rest_framework import generics
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 from .models import Team, Player
-from .serializers import TeamSerializer, PlayerSerializer
+from .serializers import TeamSerializer, PlayerSerializer, UserDisplaySerializer
+
+
+class IndexTemplateView(TemplateView):
+
+    def get_template_names(self):
+        template_name = "index.html"
+        return template_name
+
+
+class UserDisplayAPIView(APIView):
+
+    def get(self, request):
+        serializer = UserDisplaySerializer(request.user)
+        return Response(serializer.data)
 
 
 class TeamList(generics.ListAPIView):
