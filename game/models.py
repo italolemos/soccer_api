@@ -142,8 +142,8 @@ class Match(models.Model):
 
 class UserTeam(models.Model):
     owner = models.OneToOneField(get_user_model(), verbose_name='Cartoleiro', on_delete=models.CASCADE)
-    team_name = models.CharField('Nome do Time', max_length=100)
-    club_fan = models.ForeignKey(Team, verbose_name='Time do Coração', on_delete=models.CASCADE)
+    team_name = models.CharField('Nome do Time', max_length=100, unique=True)
+    # club_fan = models.ForeignKey(Team, verbose_name='Time do Coração', on_delete=models.CASCADE)
     player1 = models.ForeignKey(Player, verbose_name='Jogador', on_delete=models.CASCADE, related_name='player1')
     player2 = models.ForeignKey(Player, verbose_name='Jogador', on_delete=models.CASCADE, related_name='player2')
     player3 = models.ForeignKey(Player, verbose_name='Jogador', on_delete=models.CASCADE, related_name='player3')
@@ -165,8 +165,36 @@ class UserTeam(models.Model):
         return self.team_name
 
 
-# class Scouts(models.Model):
-#     player = models.ForeignKey(Player, verbose_name='Jogador', on_delete=models.CASCADE)
-#     team = models.ForeignKey(Team, verbose_name='Time', on_delete=models.CASCADE)
-#     status = models.ForeignKey(Status, verbose_name='Status',  on_delete=models.CASCADE)
+class Scouts(models.Model):
+    player = models.ForeignKey(Player, verbose_name='Jogador', on_delete=models.CASCADE)
+    status = models.ForeignKey(Status, verbose_name='Status',  on_delete=models.CASCADE)
+    round = models.IntegerField('Rodada', validators=[MinValueValidator(1), MaxValueValidator(38)])
+    roubada_de_bola = models.DecimalField('Roubada de Bola', max_digits=2, decimal_places=1)
+    falta_cometida = models.DecimalField('Falta Cometida', max_digits=2, decimal_places=1)
+    gol_conta = models.DecimalField('Gol Contra', max_digits=2, decimal_places=1)
+    cartao_amarelo = models.DecimalField('Cartao Amarelo', max_digits=2, decimal_places=1)
+    cartao_vermelho = models.DecimalField('Cartao Vermelho', max_digits=2, decimal_places=1)
+    nao_sofreu_gol = models.DecimalField('Jogo Sem Sofrer Gol', max_digits=2, decimal_places=1)
+    defesa_dificil = models.DecimalField('Defesa Dificil', max_digits=2, decimal_places=1)
+    defesa_penalti = models.DecimalField('Defesa de Penalti', max_digits=2, decimal_places=1)
+    gol_sofrido = models.DecimalField('Gol Sofrido', max_digits=2, decimal_places=1)
+    falta_sofrida = models.DecimalField('Falta Sofrida', max_digits=2, decimal_places=1)
+    passe_errado = models.DecimalField('Passe Errado', max_digits=2, decimal_places=1)
+    assistencia = models.DecimalField('Assistencia', max_digits=2, decimal_places=1)
+    finalizacao_trave = models.DecimalField('Finalizacao na Trave', max_digits=2, decimal_places=1)
+    finalizacao_defendida = models.DecimalField('Finalizacao Defendida', max_digits=2, decimal_places=1)
+    finalizacao_fora = models.DecimalField('Finalizacao pra fora', max_digits=2, decimal_places=1)
+    gol = models.DecimalField('Gol', max_digits=2, decimal_places=1)
+    impedimento = models.DecimalField('Impedimento', max_digits=2, decimal_places=1)
+    penalti_perdido = models.DecimalField('Penalti Perdido', max_digits=2, decimal_places=1)
+
+    class Meta:
+        verbose_name = 'Scout'
+        verbose_name_plural = 'Scouts'
+
+    def __str__(self):
+        return self.player
+
+
+
 

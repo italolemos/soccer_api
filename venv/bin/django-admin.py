@@ -1,4 +1,4 @@
-#!/home/italolemos/Documentos/soccer_api/venv/bin/python
+#!/Users/italolemos/PycharmProjects/soccer_api/venv/bin/python3
 from django.core import management
 
 if __name__ == "__main__":

@@ -36,3 +36,4 @@ local_settings.py
 db.sqlite3
 
 game/migrations/*
+venv/
