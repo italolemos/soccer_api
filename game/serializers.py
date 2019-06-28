@@ -1,13 +1,5 @@
 from .models import Team, Player
 from rest_framework import serializers
-from .models import User
-
-
-class UserDisplaySerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = User
-        fields = ['username']
 
 
 class TeamSerializer(serializers.ModelSerializer):
