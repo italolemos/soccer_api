@@ -13,7 +13,7 @@ class TeamSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Team
-        exclude = ['id']
+        fields = '__all__'
 
 
 class PlayerSerializer(serializers.ModelSerializer):

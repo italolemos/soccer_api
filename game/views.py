@@ -40,6 +40,14 @@ class PlayerDetail(generics.RetrieveAPIView):
     serializer_class = PlayerSerializer
 
 
+class PlayerList(generics.ListAPIView):
+    """
+    List all playeres.
+    """
+    queryset = Player.objects.all()
+    serializer_class = PlayerSerializer
+
+
 class UserTeamDetail(generics.ListAPIView):
     """
     Retrieve a user team.
@@ -82,7 +90,12 @@ def importar_clubs(self):
 
 def importar_atletas(self):
     atletas = [
-        ['Mailson', 'mailson', 20, 'GOL', 8.00],
+        ['Mailson', 'mailson', 18, 'GOL', 8.00],
+        ['Michel Bastos', 'michel-bastos', 1, 'MEI', 12.00],
+        ['Hernane', 'hernane', 18, 'ATA', 9.00],
+        ['Sander', 'sander', 18, 'LAT', 5.00],
+        ['Paulão', 'paulao', 16, 'ZAG', 2.00]
+
     ]
 
     for a in atletas:
