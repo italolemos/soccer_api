@@ -59,49 +59,54 @@ class UserTeamDetail(generics.ListAPIView):
 
 def importar_clubs(self):
     clubes = [
-        ['América-MG', 'AMG', 'america-mg'],
-        ['Atlético-GO', 'ATL', 'atletico'],
-        ['Botafogo-SP', 'BTF', 'botafogo-sp'],
-        ['Bragantino', 'BGR', 'bragantino'],
-        ['Brasil de Pelotas', 'BPL', 'brasil-pelotas'],
-        ['Coritiba', 'COR', 'coritiba'],
-        ['Criciúma', 'CRI', 'criciuma'],
+        ['América-MG', 'AMG'],
+        ['Atlético-GO', 'ATL'],
+        ['Botafogo-SP', 'BTF'],
+        ['Bragantino', 'BGR'],
+        ['Brasil de Pelotas', 'BPL'],
+        ['Coritiba', 'COR'],
+        ['Criciúma', 'CRI'],
         ['CRB', 'CRB', 'crb'],
-        ['Cuiabá', 'CUB', 'cuiaba'],
-        ['Figueirense', 'FIG', 'figueirense'],
-        ['Guarani', 'GUA', 'guarani'],
-        ['Londrina', 'LON', 'londrina'],
-        ['Oeste', 'OES', 'oeste'],
-        ['Operário-PR', 'OPE', 'operario-pr'],
-        ['Paraná', 'PAR', 'parana'],
-        ['Ponte Preta', 'PON', 'ponte-preta'],
-        ['São Bento', 'SAB', 'sao-bento'],
-        ['Sport', 'SPO', 'sport'],
-        ['Vila Nova', 'VIL', 'vila-nova'],
-        ['Vitória', 'VIT', 'vitoria']
+        ['Cuiabá', 'CUB'],
+        ['Figueirense', 'FIG'],
+        ['Guarani', 'GUA'],
+        ['Londrina', 'LON'],
+        ['Oeste', 'OES'],
+        ['Operário-PR', 'OPE'],
+        ['Paraná', 'PAR'],
+        ['Ponte Preta', 'PON'],
+        ['São Bento', 'SAB'],
+        ['Sport', 'SPO'],
+        ['Vila Nova', 'VIL'],
+        ['Vitória', 'VIT']
     ]
 
     for c in clubes:
         Team.objects.update_or_create(name=c[0],
                                       abbreviation=c[1],
-                                      slug=c[2])
+                                      )
     return HttpResponse('OK')
 
 
 def importar_atletas(self):
     atletas = [
-        ['Mailson', 'mailson', 18, 'GOL', 8.00],
-        ['Michel Bastos', 'michel-bastos', 1, 'MEI', 12.00],
-        ['Hernane', 'hernane', 18, 'ATA', 9.00],
-        ['Sander', 'sander', 18, 'LAT', 5.00],
-        ['Paulão', 'paulao', 16, 'ZAG', 2.00]
-
+        ['Mailson', 'SPO', 'GOL', 8.00],
+        ['Michel Bastos', 'AMG', 'MEI', 12.00],
+        ['Hernane', 'SPO', 'ATA', 9.00],
+        ['Sander', 'SPO', 'LAT', 5.00],
+        ['Paulão', 'SPO', 'ZAG', 2.00],
+        ['Alex Muralha', 'COR', 'GOL', 4.00],
+        ['Rodrigão', 'COR', 'ATA', 6.00],
+        ['Victor Ramos', 'CRB', 'ZAG', 4.50],
+        ['Marcelo Chamusca', 'CRB', 'TEC', 2.00],
+        ['Roger', 'PON', 'ATA', 7.00],
+        ['Doriva', 'PON', 'TEC', 5.00],
+        ['Luan Sales', 'ATL', 'LAT', 4.00]
     ]
 
     for a in atletas:
         Player.objects.update_or_create(name=a[0],
-                                        slug=a[1],
-                                        team=Team.objects.get(id=a[2]),
-                                        position=a[3],
-                                        price=a[4])
+                                        team=Team.objects.get(abbreviation=a[1]),
+                                        position=a[2],
+                                        price=a[3])
     return HttpResponse('OK')
